@@ -1,0 +1,101 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1rem 0}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.band-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;text-align:center}
+.band-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.band-val{font-size:20px;font-weight:500}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1rem}
+.filter-btn{font-size:13px;padding:4px 12px;border-radius:99px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.filter-btn.active{background:var(--color-background-info);color:var(--color-text-info);border-color:transparent}
+.items{display:flex;flex-direction:column;gap:10px}
+.item{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;background:var(--color-background-primary)}
+.item-header{display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;flex-wrap:wrap}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;white-space:nowrap;font-weight:500}
+.badge-error{background:var(--color-background-danger);color:var(--color-text-danger)}
+.badge-improve{background:var(--color-background-warning);color:var(--color-text-warning)}
+.badge-tr{background:#E6F1FB;color:#0C447C}
+.badge-cc{background:#EAF3DE;color:#27500A}
+.badge-lr{background:#FAEEDA;color:#633806}
+.badge-gr{background:#FBEAF0;color:#72243E}
+.quote{font-size:13px;font-style:italic;color:var(--color-text-secondary);background:var(--color-background-secondary);border-left:3px solid var(--color-border-secondary);padding:6px 10px;border-radius:0 4px 4px 0;margin-bottom:10px;line-height:1.5}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.detail-block{font-size:13px}
+.detail-label{font-size:11px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.detail-text{color:var(--color-text-primary);line-height:1.5}
+.correction{color:var(--color-text-success)}
+</style>
+<div class="wrap">
+<h2 class="sr-only">IELTS Writing Task 2 feedback on youth investment essay: errors and improvements across four band criteria</h2>
+
+<div class="summary-grid">
+  <div class="band-card"><div class="band-label">Task Response</div><div class="band-val" style="color:#185FA5">~5.5</div></div>
+  <div class="band-card"><div class="band-label">Coherence & Cohesion</div><div class="band-val" style="color:#3B6D11">~5</div></div>
+  <div class="band-card"><div class="band-label">Lexical Resource</div><div class="band-val" style="color:#854F0B">~5</div></div>
+  <div class="band-card"><div class="band-label">Grammatical Range</div><div class="band-val" style="color:#993556">~5</div></div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filter('all',this)">All</button>
+  <button class="filter-btn" onclick="filter('error',this)">Errors only</button>
+  <button class="filter-btn" onclick="filter('improve',this)">Improvements only</button>
+  <button class="filter-btn" onclick="filter('TR',this)">TR</button>
+  <button class="filter-btn" onclick="filter('CC',this)">CC</button>
+  <button class="filter-btn" onclick="filter('LR',this)">LR</button>
+  <button class="filter-btn" onclick="filter('GR',this)">GR</button>
+</div>
+
+<div class="items" id="items"></div>
+</div>
+
+<script>
+const data=[
+  {type:"error",cat:"GR",quote:"More resources investment in young generation is the most effective way to have preparation for the future of a country.",explanation:"Three issues in one sentence: (1) 'More resources investment' is a malformed noun phrase — it should be 'investing more resources' or 'greater investment in'; (2) 'young generation' needs the definite article 'the'; (3) 'to have preparation for' is an unnatural, wordy construction.",hint:"Restructure using a gerund or noun phrase as subject, and use a natural infinitive expression.",correction:"Investing more resources in the younger generation is the most effective way to prepare a country for the future."},
+  {type:"error",cat:"GR",quote:"young generation is a country's future workforce, adolescents contribute mostly to the economy in the future.",explanation:"This is a comma splice — two independent clauses joined only by a comma. This is a punctuation error at the sentence level.",hint:"Separate into two sentences, or join with a conjunction such as 'as' or 'since'.",correction:"The younger generation represents a country's future workforce, as young people will be the primary contributors to the economy."},
+  {type:"error",cat:"GR",quote:"the young students can access to the education",explanation:"'Access' as a verb does not take the preposition 'to' — it is transitive. Also, 'the education' has an unnecessary definite article; 'education' here is used in a general, uncountable sense.",hint:"Remove 'to' after 'access', and remove 'the' before 'education'.",correction:"young students can access quality education"},
+  {type:"error",cat:"GR",quote:"Because that, the quality of the future workforce can be upgraded.",explanation:"'Because that' is not grammatically correct. The intended meaning is causal, so the correct connector is 'Because of this,' or 'As a result,'.",hint:"Use a proper causal connector.",correction:"As a result, the quality of the future workforce can be enhanced."},
+  {type:"error",cat:"GR",quote:"their adaptations with the developments of the technology can help them easily using the new device make advancement in technology",explanation:"Multiple errors: (1) 'adaptations with' should be 'adaptability to'; (2) 'the technology' has an unnecessary article; (3) 'help them easily using' is ungrammatical — 'help' takes a bare infinitive, not a gerund; (4) 'make advancement' should be 'make advancements' or 'drive technological progress'.",hint:"Simplify and reconstruct: focus on adaptability + infinitive after 'help'.",correction:"their adaptability to technological developments enables them to quickly master new tools and drive innovation."},
+  {type:"error",cat:"GR",quote:"The government can retrain programs for adults to equip new skills",explanation:"'Retrain programs' is not grammatically correct — 'retrain' is a verb being used as an adjective modifier. The intended meaning is 'retraining programmes'. Also, 'equip new skills' is the wrong collocation; you equip people with skills, not equip skills.",hint:"Use the noun 'retraining' and fix the collocation with 'equip'.",correction:"The government can introduce retraining programmes for adults to equip them with new skills"},
+  {type:"error",cat:"LR",quote:"the civilians's living standard",explanation:"Double possessive error — 'civilians's' is incorrect. The apostrophe placement is wrong. Also, 'civilians' is an unusual word choice here; 'residents' or 'citizens' is more natural in this context.",hint:"Fix the possessive: 'civilians'' (plural possessive needs only an apostrophe after the s). Better yet, rephrase with 'of'.",correction:"the living standards of citizens"},
+  {type:"error",cat:"CC",quote:"In contrast, investing only in young people is not enough, the government should also invest in other age groups and key areas.",explanation:"'In contrast' signals opposition between two contrasting ideas. However, this sentence is not contrasting the previous paragraph — it is extending it with a qualification. The connector is logically mismatched. There is also another comma splice.",hint:"Use a connector that signals addition of a nuance or qualification, and split the sentence properly.",correction:"While investing in youth is vital, it alone is insufficient; the government should also allocate resources to other age groups and key sectors."},
+  {type:"improve",cat:"TR",quote:"I agree with this opinion but the government should not invest in adolescents only.",explanation:"The question asks 'to what extent do you agree or disagree?' — this requires a measured, nuanced position. The introduction dismisses the statement in the same sentence it agrees with it, without signalling that this nuance will be argued. A partial agreement needs to be framed clearly.",hint:"State clearly that you partially agree, and briefly indicate the two directions the essay will take.",correction:"I largely agree with this view; however, I believe that investing exclusively in young people is insufficient, and that a broader, balanced approach to national investment is also necessary."},
+  {type:"improve",cat:"TR",quote:"Also, with the high education standard, the young students can access to the education.",explanation:"This sentence is unclear in its logical connection to the previous one. 'High education standard' seems to be an assumption rather than a developed argument. The link between investing in youth and education standards needs to be made explicit.",hint:"Explain the causal chain: investment → improved education access → higher-quality workforce.",correction:"Investment in education enables young people to acquire the skills and knowledge needed to become a productive future workforce."},
+  {type:"improve",cat:"TR",quote:"For example, government can invest in healthcare facilities and training doctors. In terms of the transportation, the investment can be used for the infrastructure and transport system.",explanation:"These examples are listed but not connected to the essay's main argument — preparing for the future. The healthcare and transport points feel generic and underdeveloped. Without a clear link to future preparedness, they risk appearing irrelevant.",hint:"Connect each example back to the central claim: how does healthcare or transport investment prepare a country for the future?",correction:"For instance, investing in healthcare infrastructure ensures a healthier, more productive population, which is essential for long-term economic growth."},
+  {type:"improve",cat:"CC",quote:"Firstly… Also… Because that… In addition… Especially… In contrast… In addition… For example… In terms of… Therefore…",explanation:"The essay overuses transition words, some of which are inaccurate ('Because that', 'Especially'). The volume of connectors gives the impression of mechanical linking rather than natural flow. Band 6+ requires cohesion to feel purposeful, not formulaic.",hint:"Reduce reliance on sentence-opener connectors. Where ideas are closely related, use subordinate clauses or relative clauses to link them within a single sentence instead.",correction:"Example: Instead of 'Especially, their adaptations...' simply write: 'This adaptability, particularly in relation to rapidly evolving technology, positions young people to drive future innovation.'"},
+  {type:"improve",cat:"LR",quote:"young generation… adolescents… young people… young students",explanation:"The essay uses multiple synonyms for the same group, which is good practice, but 'young generation' is repeated without the article 'the', and 'adolescents' is used interchangeably with 'young students', which are not exact synonyms (adolescents = teenagers; university students may not be adolescents).",hint:"Use 'the younger generation' as your base term, and ensure synonyms (youth, young adults, young people) are precise in context.",correction:"Use: 'the younger generation' / 'young people' / 'young adults' — avoid 'adolescents' when referring to university-age or working-age youth."},
+  {type:"improve",cat:"LR",quote:"upgraded… make advancement",explanation:"'Upgraded' and 'make advancement' are informal or imprecise in academic context. 'Upgraded' suggests software/hardware; 'make advancement' is a non-standard collocation.",hint:"Replace with more formal academic vocabulary.",correction:"'upgraded' → enhanced / elevated; 'make advancement' → drive progress / foster innovation"},
+  {type:"improve",cat:"GR",quote:"young generation is very creative, innovative and adaptable.",explanation:"This is a simple declarative sentence with no subordination. The three-adjective list is accurate but grammatically flat. Band 6+ requires a variety of complex structures, not just simple sentences.",hint:"Embed this as a relative clause or combine it with a consequence clause.",correction:"The younger generation, widely regarded as creative, innovative and highly adaptable, is uniquely positioned to drive the transformations that a modern economy demands."}
+];
+
+function catClass(c){return{TR:'badge-tr',CC:'badge-cc',LR:'badge-lr',GR:'badge-gr'}[c]||''}
+
+function render(items){
+  document.getElementById('items').innerHTML=items.map(d=>`
+    <div class="item">
+      <div class="item-header">
+        <span class="badge ${d.type==='error'?'badge-error':'badge-improve'}">${d.type==='error'?'Error':'Improvement'}</span>
+        <span class="badge ${catClass(d.cat)}">${d.cat}</span>
+      </div>
+      <div class="quote">"${d.quote}"</div>
+      <div class="grid2">
+        <div class="detail-block"><div class="detail-label">Explanation</div><div class="detail-text">${d.explanation}</div></div>
+        <div class="detail-block"><div class="detail-label">Hint</div><div class="detail-text">${d.hint}</div></div>
+      </div>
+      <div class="detail-block" style="margin-top:10px"><div class="detail-label">Correction / suggestion</div><div class="detail-text correction">${d.correction}</div></div>
+    </div>
+  `).join('');
+}
+
+function filter(key,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  let f=data;
+  if(key==='error') f=data.filter(d=>d.type==='error');
+  else if(key==='improve') f=data.filter(d=>d.type==='improve');
+  else if(['TR','CC','LR','GR'].includes(key)) f=data.filter(d=>d.cat===key);
+  render(f);
+}
+
+render(data);
+</script>
