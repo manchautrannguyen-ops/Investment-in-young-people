@@ -1,0 +1,85 @@
+
+<h2 class="sr-only">IELTS Writing Task 2 feedback: errors and improvements across four band criteria</h2>
+<style>
+.wrap{padding:1rem 0}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.bc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;text-align:center;border:0.5px solid var(--color-border-tertiary)}
+.bl{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+.bv{font-size:20px;font-weight:500}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.fb{font-size:12px;padding:4px 11px;border-radius:99px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.fb.on{background:var(--color-background-info);color:var(--color-text-info);border-color:transparent}
+.items{display:flex;flex-direction:column;gap:10px}
+.item{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;background:var(--color-background-primary)}
+.ih{display:flex;gap:7px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;white-space:nowrap;font-weight:500}
+.be{background:var(--color-background-danger);color:var(--color-text-danger)}
+.bi{background:var(--color-background-warning);color:var(--color-text-warning)}
+.btr{background:#E6F1FB;color:#0C447C}
+.bcc{background:#EAF3DE;color:#27500A}
+.blr{background:#FAEEDA;color:#633806}
+.bgr{background:#FBEAF0;color:#72243E}
+.qt{font-size:13px;font-style:italic;color:var(--color-text-secondary);background:var(--color-background-secondary);border-left:3px solid var(--color-border-secondary);padding:7px 11px;border-radius:0 4px 4px 0;margin-bottom:10px;line-height:1.55}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.db{font-size:13px}
+.dl{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.dt{color:var(--color-text-primary);line-height:1.5}
+.cv{color:var(--color-text-success);font-size:13px;line-height:1.5}
+.empty{text-align:center;color:var(--color-text-secondary);font-size:13px;padding:2.5rem}
+</style>
+<div class="wrap">
+<div class="sg">
+  <div class="bc"><div class="bl">Task Response</div><div class="bv" style="color:#185FA5">~5.5</div></div>
+  <div class="bc"><div class="bl">Coherence & Cohesion</div><div class="bv" style="color:#3B6D11">~6</div></div>
+  <div class="bc"><div class="bl">Lexical Resource</div><div class="bv" style="color:#854F0B">~6</div></div>
+  <div class="bc"><div class="bl">Grammatical Range</div><div class="bv" style="color:#993556">~5.5</div></div>
+</div>
+<div class="filters">
+  <button class="fb on" onclick="flt('all',this)">All</button>
+  <button class="fb" onclick="flt('error',this)">Errors only</button>
+  <button class="fb" onclick="flt('improve',this)">Improvements only</button>
+  <button class="fb" onclick="flt('TR',this)">TR</button>
+  <button class="fb" onclick="flt('CC',this)">CC</button>
+  <button class="fb" onclick="flt('LR',this)">LR</button>
+  <button class="fb" onclick="flt('GR',this)">GR</button>
+</div>
+<div class="items" id="items"></div>
+</div>
+<script>
+const D=[
+  {t:"error",c:"TR",q:"On the one hand… On the other hand…",x:"This is an 'agree or disagree' question, not a 'discuss both views' question. 'On the one hand / on the other hand' frames the essay as a neutral presentation of two opposing views, which contradicts the stated position of strong agreement. A clear personal position should be argued throughout, not balanced against an opposing side.",h:"Replace contrast signposting with qualifications of your own position. One paragraph develops why youth investment is essential; the other explains why it must be complemented by broader investment.",s:"Body paragraph 1 opener: 'Investing in young people yields substantial benefits for national development…' Body paragraph 2 opener: 'Nonetheless, an exclusive focus on youth fails to account for other areas critical to a country's future…'"},
+  {t:"error",c:"GR",q:"allocating more resources on younger generation",x:"Two errors: (1) 'Allocate resources' collocates with 'to', not 'on'. (2) 'Younger generation' is missing the definite article 'the'.",h:"Use 'to' after 'allocating resources', and add 'the' before 'younger generation'.",s:"allocating more resources to the younger generation"},
+  {t:"error",c:"GR",q:"funding on teenagers is essential",x:"'Funding on' is an incorrect collocation. 'Fund' takes a direct object without a preposition: 'funding teenagers' or, more accurately, 'investing in young people'.",h:"Remove the preposition 'on', or rephrase as 'investing in young people'.",s:"investing in young people is essential"},
+  {t:"error",c:"GR",q:"It should be balanced to invest money in several sectors.",x:"'It should be balanced to invest money' is an ungrammatical construction. 'Balanced' here is used as a predicate adjective, but the sentence lacks a clear subject and logical structure. The intended meaning is that investment should be distributed across sectors.",h:"Rewrite with a clear subject and a standard verb phrase.",s:"However, such investment should be balanced with targeted funding across other critical sectors."},
+  {t:"error",c:"GR",q:"prioritizing young people bring many benefits",x:"Subject-verb agreement error. 'Prioritizing young people' is a gerund phrase — a singular subject — requiring a singular verb 'brings', not 'bring'.",h:"Change 'bring' to 'brings'.",s:"prioritizing young people brings many benefits"},
+  {t:"error",c:"GR",q:"knowledge and skills which is very crucial to the economy",x:"Subject-verb agreement error. 'Knowledge and skills' is a plural compound subject, requiring 'are', not 'is'.",h:"Change 'is' to 'are'.",s:"knowledge and skills which are crucial to the economy"},
+  {t:"error",c:"GR",q:"They have a wide range experience and knowledge",x:"Missing article: 'a wide range of experience'. 'Range' requires 'of' before the noun it introduces.",h:"Add 'of' after 'range'.",s:"They possess a wide range of experience and knowledge"},
+  {t:"error",c:"GR",q:"which can be shared with younger generation which lead to overall contribution together",x:"Two errors: (1) 'younger generation' is missing the article 'the'. (2) 'which lead' has a subject-verb agreement error — 'which' refers to a singular act of sharing, so it should be 'leads'. (3) 'Overall contribution together' is a vague, redundant phrase.",h:"Add the article, fix the verb agreement, and replace the vague phrase with a more precise expression.",s:"which can be shared with the younger generation, thereby fostering intergenerational knowledge transfer and collective national progress"},
+  {t:"error",c:"GR",q:"adapt to this changing markets",x:"Article error: 'this' is a singular demonstrative but 'markets' is plural. The correct determiner is 'these' for plural nouns, or 'the' for a general reference.",h:"Change 'this' to 'these' or 'the'.",s:"adapt to these changing markets / adapt to evolving market conditions"},
+  {t:"error",c:"GR",q:"they can still play a active role",x:"Article error: 'a' precedes a vowel sound ('active' starts with a vowel), so the indefinite article must be 'an'.",h:"Change 'a' to 'an'.",s:"they can still play an active role"},
+  {t:"error",c:"GR",q:"entering workforce again and dedicate to future economy",x:"Parallel structure error: 'entering workforce' is a gerund, but 'dedicate' is a bare infinitive. The two coordinated verbs must be in the same form. Also, 'dedicate to future economy' is missing an article before 'future economy' and is an unusual collocation.",h:"Make both verbs parallel gerunds, and fix the article and collocation.",s:"re-entering the workforce and contributing to economic growth"},
+  {t:"error",c:"LR",q:"a developed country also needs to fund in environmental protection and infrastructure",x:"'Fund in' is an incorrect collocation — 'fund' is transitive and takes a direct object without a preposition. 'A developed country' is also slightly contradictory in context: the essay argues about preparing for the future, implying the country may not yet be fully developed.",h:"Remove 'in' after 'fund', and consider whether 'developed' is the right adjective.",s:"governments must also invest in environmental protection and infrastructure"},
+  {t:"error",c:"GR",q:"well transport system",x:"'Well transport system' is ungrammatical. 'Well' is an adverb and cannot modify a noun directly. The intended meaning is 'a well-functioning transport system' or 'efficient transport networks'.",h:"Add a past participle: 'well-developed' or 'well-functioning' to form a compound adjective.",s:"a well-developed transport system / efficient transport infrastructure"},
+  {t:"improve",c:"TR",q:"While I strongly agree that funding on teenagers is essential, It should be balanced to invest money in several sectors.",x:"The thesis claims 'strong agreement' but immediately qualifies it by saying other sectors are equally important. This is a partial-agreement position, not strong agreement. The contradiction undermines the stated stance from the opening paragraph.",h:"Align your stated degree of agreement with what you actually argue. If you believe in balanced investment, say you 'largely agree' or 'agree with qualification'.",s:"While I largely agree that investing in young people is essential for national progress, I believe this must be complemented by targeted investment in other sectors to ensure comprehensive and sustainable development."},
+  {t:"improve",c:"TR",q:"In conclusion, although young generations play an important role in national development, the government also need to invest in other critical areas.",x:"The conclusion is underdeveloped — it introduces no synthesis and does not refer to the specific areas discussed in the body. It essentially restates the thesis without adding closure. Also, 'government also need' is a subject-verb agreement error ('government… needs').",h:"Refer specifically to the areas discussed (young people, experienced workers, infrastructure/environment) and connect them to the essay's argument.",s:"In conclusion, while investing in young people is a vital pillar of national development, a truly future-ready country must also support its experienced workforce, develop robust infrastructure, and protect its environment — all of which work in concert to drive sustained progress."},
+  {t:"improve",c:"LR",q:"respiratory diseases such as lung and heart issues",x:"'Lung and heart issues' is informal and imprecise. 'Issues' is too vague for academic writing, and 'lung' used as a noun (rather than a modifier) is also awkward. The example refers to respiratory diseases but then lists cardiovascular conditions too, which are technically distinct.",h:"Use precise medical/academic vocabulary for conditions caused by air pollution.",s:"respiratory conditions such as chronic obstructive pulmonary disease (COPD) and cardiovascular disease"},
+  {t:"improve",c:"CC",q:"It not only benefits them but also generates high-skilled workforce in the long run which supports stable development in economy.",x:"Missing article before 'high-skilled workforce' ('a high-skilled workforce'). 'Stable development in economy' is also missing an article and is an unusual collocation — 'sustainable economic development' is the standard phrase.",s:"This not only benefits individuals but also cultivates a highly skilled workforce that sustains long-term economic development."},
+  {t:"improve",c:"TR",q:"When children are exposed to high quality education, and proper guidance from parents and schools, they are more likely to discover their talents and pursue suitable career path.",x:"'Suitable career path' is missing the article 'a'. More importantly, this argument shifts focus to parental guidance, which is outside the scope of government investment — the question's focus. Bringing in parents dilutes the argument.",h:"Remove the reference to parental guidance or reframe it as part of a broader educational investment policy. Add the article.",s:"When young people have access to quality education and well-resourced career guidance, they are more likely to identify their strengths and pursue a career path that aligns with national economic needs."}
+];
+function cc(c){return{TR:'btr',CC:'bcc',LR:'blr',GR:'bgr'}[c]||''}
+function render(items){
+  const el=document.getElementById('items');
+  if(!items.length){el.innerHTML='<div class="empty">No items match this filter.</div>';return;}
+  el.innerHTML=items.map(d=>`<div class="item"><div class="ih"><span class="badge ${d.t==='error'?'be':'bi'}">${d.t==='error'?'Error':'Improvement'}</span><span class="badge ${cc(d.c)}">${d.c}</span></div><div class="qt">"${d.q}"</div><div class="g2"><div class="db"><div class="dl">Explanation</div><div class="dt">${d.x}</div></div><div class="db"><div class="dl">Hint</div><div class="dt">${d.h||''}</div></div></div><div class="db"><div class="dl">Correction / suggestion</div><div class="cv">${d.s}</div></div></div>`).join('');
+}
+function flt(k,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  let f=D;
+  if(k==='error')f=D.filter(d=>d.t==='error');
+  else if(k==='improve')f=D.filter(d=>d.t==='improve');
+  else if(['TR','CC','LR','GR'].includes(k))f=D.filter(d=>d.c===k);
+  render(f);
+}
+render(D);
+</script>
