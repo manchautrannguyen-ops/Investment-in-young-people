@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Essay Feedback</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0f0f0f;
+    --surface: #181818;
+    --surface2: #212121;
+    --border: #2a2a2a;
+    --text: #e8e8e8;
+    --muted: #888;
+    --error-bg: #2a1215;
+    --error-text: #f87171;
+    --improve-bg: #1a1a08;
+    --improve-text: #facc15;
+    --tr: #1a2a3a;
+    --tr-text: #60a5fa;
+    --cc: #0f2a1a;
+    --cc-text: #4ade80;
+    --lr: #2a1f0a;
+    --lr-text: #fb923c;
+    --gr: #2a0f1f;
+    --gr-text: #f472b6;
+    --band-6: #60a5fa;
+    --band-6c: #4ade80;
+    --band-6l: #fb923c;
+    --band-6g: #f472b6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+  }
+
+  .header h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+  }
+
+  .band-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  .band-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+
+  .band-label {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .band-val {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.05em;
+  }
+
+  .filter-btn:hover { border-color: #555; color: var(--text); }
+  .filter-btn.active { background: var(--surface2); color: var(--text); border-color: #555; }
+
+  .items { display: flex; flex-direction: column; gap: 10px; }
+
+  .item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    transition: border-color 0.15s;
+  }
+
+  .item:hover { border-color: #3a3a3a; }
+
+  .item-header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .badge-error { background: var(--error-bg); color: var(--error-text); }
+  .badge-improve { background: var(--improve-bg); color: var(--improve-text); }
+  .badge-tr { background: var(--tr); color: var(--tr-text); }
+  .badge-cc { background: var(--cc); color: var(--cc-text); }
+  .badge-lr { background: var(--lr); color: var(--lr-text); }
+  .badge-gr { background: var(--gr); color: var(--gr-text); }
+
+  .quote {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--surface2);
+    border-left: 3px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  .detail-block { font-size: 13px; line-height: 1.55; }
+  .detail-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .detail-text { color: #ccc; }
+
+  .correction-block { font-size: 13px; }
+  .correction-text {
+    color: #4ade80;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    background: #0a1a0a;
+    border: 1px solid #1a3a1a;
+    border-radius: 4px;
+    padding: 8px 12px;
+    margin-top: 4px;
+  }
+
+  .empty-state {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 3rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>IELTS Writing Task 2 — Essay Feedback</h1>
+  <div class="band-grid">
+    <div class="band-card">
+      <div class="band-label">Task Response</div>
+      <div class="band-val" style="color:var(--band-6)">~6</div>
+    </div>
+    <div class="band-card">
+      <div class="band-label">Coherence & Cohesion</div>
+      <div class="band-val" style="color:var(--band-6c)">~6</div>
+    </div>
+    <div class="band-card">
+      <div class="band-label">Lexical Resource</div>
+      <div class="band-val" style="color:var(--band-6l)">~6</div>
+    </div>
+    <div class="band-card">
+      <div class="band-label">Grammatical Range</div>
+      <div class="band-val" style="color:var(--band-6g)">~5.5</div>
+    </div>
+  </div>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filter('all',this)">All</button>
+  <button class="filter-btn" onclick="filter('error',this)">Errors only</button>
+  <button class="filter-btn" onclick="filter('improve',this)">Improvements only</button>
+  <button class="filter-btn" onclick="filter('TR',this)">TR</button>
+  <button class="filter-btn" onclick="filter('CC',this)">CC</button>
+  <button class="filter-btn" onclick="filter('LR',this)">LR</button>
+  <button class="filter-btn" onclick="filter('GR',this)">GR</button>
+</div>
+
+<div class="items" id="items"></div>
+
+<script>
+const data=[
+  {type:"error",cat:"TR",quote:"On the one hand… On the other hand…",explanation:"This is an 'agree or disagree' question, not a 'discuss both views' question. 'On the one hand / on the other hand' signals a neutral discussion of opposing views, contradicting the stated partial-agreement position.",hint:"Use body paragraph openers that support and qualify your stated position rather than presenting two neutral sides.",correction:"Body paragraph 1: 'There are compelling reasons to support investment in young people...' Body paragraph 2: 'However, a balanced approach requires investment across other sectors and age groups as well...'"},
+  {type:"error",cat:"GR",quote:"there are various sectors that also need to be invested",explanation:"'Need to be invested' is incomplete — 'invested' as a passive requires the preposition 'in' to complete its meaning.",hint:"Add 'in' after 'invested'.",correction:"there are various sectors that also need to be invested in"},
+  {type:"error",cat:"GR",quote:"the government needs to allocate resources to young generation",explanation:"'Young generation' is missing the definite article 'the'. As a specific, identifiable group, it requires the article. This error recurs throughout the essay.",hint:"Always use 'the' before 'young generation' or 'younger generation'.",correction:"the government needs to allocate resources to the younger generation"},
+  {type:"error",cat:"LR",quote:"adopt new technologies fastly",explanation:"'Fastly' is not a standard English word. The adjective 'fast' is also its own adverb form — no '-ly' suffix is added.",hint:"Replace 'fastly' with 'fast' or the more formal 'rapidly'.",correction:"adopt new technologies rapidly and effectively"},
+  {type:"error",cat:"GR",quote:"For example, investing in education such as updating infrastructure for schools and equipment that assist students study online.",explanation:"This is a sentence fragment — a gerund phrase with no main verb or predicate. It cannot stand as a complete sentence.",hint:"Attach it to the previous sentence, or add a main verb to make it complete.",correction:"For example, the government could invest in education by upgrading school infrastructure and providing technology that enables students to study online."},
+  {type:"error",cat:"GR",quote:"This investment makes education more accessible to young people, especially for those who live in remote areas can gain knowledge despite their living conditions.",explanation:"Two finite verb phrases ('makes... accessible' and 'can gain knowledge') compete for the same subject, producing a fused, ungrammatical sentence.",hint:"Remove the second main verb or restructure into two clean clauses.",correction:"This investment makes education more accessible, particularly for those in remote areas who might otherwise lack quality learning opportunities."},
+  {type:"error",cat:"CC",quote:"Thereby they can apply their professional expertise and valuable experiences to make significant contributions",explanation:"'Thereby' is a mid-sentence connector meaning 'as a result of this'. Starting a new sentence with it after a full stop creates an abrupt, incomplete feel.",hint:"Use 'Thereby' internally within a sentence, or replace with 'In doing so,' or 'As a result,'.",correction:"In doing so, they can apply their professional expertise to make significant contributions to their fields and mentor the next generation."},
+  {type:"error",cat:"LR",quote:"the governments should have retraining programs to help these senior workers equip new skills",explanation:"'Have retraining programs' is informal — governments introduce, implement, or establish programmes. 'Equip new skills' is a collocation error; you equip people with skills.",hint:"Use a formal policy verb and fix the collocation: 'equip workers with new skills'.",correction:"governments should introduce retraining programmes to equip experienced workers with new skills relevant to evolving markets"},
+  {type:"error",cat:"LR",quote:"distributing goods or foods in logistics or FnB",explanation:"'FnB' is an informal regional abbreviation for 'Food and Beverage' that is unlikely to be understood by an international examiner. 'Foods' is also unusual — 'food' is typically uncountable in this context.",hint:"Write out the full term and use 'food' as uncountable.",correction:"improving the distribution of goods across logistics and the food and beverage sector"},
+  {type:"improve",cat:"TR",quote:"In my opinion, I partly agree with this statement.",explanation:"'In my opinion, I partly agree' is redundant. More critically, a partial-agreement position needs to specify which part you agree with and what the limitation is.",hint:"State your position precisely: agree that youth investment is important but argue it must be part of a broader strategy.",correction:"While I agree that investing in young people is one of the most effective ways to prepare for the future, I believe a balanced allocation across multiple sectors is equally necessary for sustained development."},
+  {type:"improve",cat:"TR",quote:"For example, building more infrastructure and transport systems can also gain some advantages",explanation:"'Gain some advantages' is vague and informal. The example is relevant but does not explain how infrastructure investment prepares the country for the future — the question's focus.",hint:"Explain the causal chain: infrastructure → economic efficiency → future readiness.",correction:"For instance, investing in transport infrastructure reduces logistical costs and facilitates trade, laying the groundwork for long-term economic competitiveness."},
+  {type:"improve",cat:"CC",quote:"As a result, adolescents can gain knowledge and skills to become a well-qualified workforce in the future and contribute to the economy.",explanation:"This closing sentence repeats ideas already stated earlier in the same paragraph, which the Band 5–6 CC rubric flags as repetition rather than development.",hint:"Replace with a forward-looking sentence that connects to the essay's central argument about future preparedness.",correction:"Such a well-equipped generation would form the backbone of a knowledge-based economy, positioning the country to compete effectively in an increasingly technology-driven world."},
+  {type:"improve",cat:"LR",quote:"contribute certain value to the economy by their experience and expertise which are gained by trial and error in their career paths",explanation:"'Certain value' is imprecise, and 'gained by trial and error in their career paths' is too informal and colloquial for academic writing.",hint:"Use precise, formal academic vocabulary to describe professional expertise.",correction:"make meaningful contributions to the economy through accumulated knowledge and professional expertise developed over their careers"},
+  {type:"improve",cat:"GR",quote:"living standards of people can be improved and build a stable foundation for the future of the country",explanation:"Parallel structure error: 'can be improved' (passive) is coordinated with 'build a stable foundation' (active), creating a grammatical mismatch.",hint:"Make both verbs parallel — both passive.",correction:"living standards can be improved and a stable foundation laid for the country's long-term development"}
+];
+
+function catClass(c){return{TR:'badge-tr',CC:'badge-cc',LR:'badge-lr',GR:'badge-gr'}[c]||''}
+
+function render(items){
+  const container=document.getElementById('items');
+  if(!items.length){container.innerHTML='<div class="empty-state">No items match this filter.</div>';return;}
+  container.innerHTML=items.map(d=>`
+    <div class="item">
+      <div class="item-header">
+        <span class="badge ${d.type==='error'?'badge-error':'badge-improve'}">${d.type==='error'?'Error':'Improvement'}</span>
+        <span class="badge ${catClass(d.cat)}">${d.cat}</span>
+      </div>
+      <div class="quote">"${d.quote}"</div>
+      <div class="grid2">
+        <div class="detail-block"><div class="detail-label">Explanation</div><div class="detail-text">${d.explanation}</div></div>
+        <div class="detail-block"><div class="detail-label">Hint</div><div class="detail-text">${d.hint}</div></div>
+      </div>
+      <div class="correction-block">
+        <div class="detail-label">Correction / Suggestion</div>
+        <div class="correction-text">${d.correction}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filter(key,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  let f=data;
+  if(key==='error') f=data.filter(d=>d.type==='error');
+  else if(key==='improve') f=data.filter(d=>d.type==='improve');
+  else if(['TR','CC','LR','GR'].includes(key)) f=data.filter(d=>d.cat===key);
+  render(f);
+}
+
+render(data);
+</script>
+</body>
+</html>
