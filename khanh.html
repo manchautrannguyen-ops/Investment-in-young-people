@@ -1,0 +1,82 @@
+
+<h2 class="sr-only">IELTS Writing Task 2 feedback: errors and improvements across four band criteria</h2>
+<style>
+.wrap{padding:1rem 0}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.bc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;text-align:center;border:0.5px solid var(--color-border-tertiary)}
+.bl{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+.bv{font-size:20px;font-weight:500}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.fb{font-size:12px;padding:4px 11px;border-radius:99px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.fb.on{background:var(--color-background-info);color:var(--color-text-info);border-color:transparent}
+.items{display:flex;flex-direction:column;gap:10px}
+.item{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;background:var(--color-background-primary)}
+.ih{display:flex;gap:7px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;white-space:nowrap;font-weight:500}
+.be{background:var(--color-background-danger);color:var(--color-text-danger)}
+.bi{background:var(--color-background-warning);color:var(--color-text-warning)}
+.btr{background:#E6F1FB;color:#0C447C}
+.bcc{background:#EAF3DE;color:#27500A}
+.blr{background:#FAEEDA;color:#633806}
+.bgr{background:#FBEAF0;color:#72243E}
+.qt{font-size:13px;font-style:italic;color:var(--color-text-secondary);background:var(--color-background-secondary);border-left:3px solid var(--color-border-secondary);padding:7px 11px;border-radius:0 4px 4px 0;margin-bottom:10px;line-height:1.55}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.db{font-size:13px}
+.dl{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.dt{color:var(--color-text-primary);line-height:1.5}
+.cv{color:var(--color-text-success);font-size:13px;line-height:1.5}
+.empty{text-align:center;color:var(--color-text-secondary);font-size:13px;padding:2.5rem}
+</style>
+<div class="wrap">
+<div class="sg">
+  <div class="bc"><div class="bl">Task Response</div><div class="bv" style="color:#185FA5">~5</div></div>
+  <div class="bc"><div class="bl">Coherence & Cohesion</div><div class="bv" style="color:#3B6D11">~5</div></div>
+  <div class="bc"><div class="bl">Lexical Resource</div><div class="bv" style="color:#854F0B">~4.5</div></div>
+  <div class="bc"><div class="bl">Grammatical Range</div><div class="bv" style="color:#993556">~4</div></div>
+</div>
+<div class="filters">
+  <button class="fb on" onclick="flt('all',this)">All</button>
+  <button class="fb" onclick="flt('error',this)">Errors only</button>
+  <button class="fb" onclick="flt('improve',this)">Improvements only</button>
+  <button class="fb" onclick="flt('TR',this)">TR</button>
+  <button class="fb" onclick="flt('CC',this)">CC</button>
+  <button class="fb" onclick="flt('LR',this)">LR</button>
+  <button class="fb" onclick="flt('GR',this)">GR</button>
+</div>
+<div class="items" id="items"></div>
+</div>
+<script>
+const D=[
+  {t:"error",c:"GR",q:"The most effective way for a country to make preparation for future is allocate more resources in young generation.",x:"Three errors: (1) 'Make preparation for future' is missing the article 'the' before 'future'. (2) 'Is allocate' should be 'is to allocate' — a subject complement after a linking verb requires a to-infinitive. (3) 'Resources in young generation' uses the wrong preposition ('in' instead of 'to') and is missing the article 'the' before 'young generation'.",h:"Add the missing articles and preposition, and insert 'to' before the infinitive.",s:"The most effective way for a country to prepare for the future is to allocate more resources to the younger generation."},
+  {t:"error",c:"GR",q:"it is one of the best way for a country can do for preparing in the future",x:"Multiple errors: (1) 'One of the best way' — 'one of the best' requires a plural noun: 'ways'. (2) 'A country can do' is a relative clause missing the relative pronoun 'that'. (3) 'For preparing in the future' — 'for preparing' is a gerund phrase used where 'to prepare for' is needed.",h:"Fix the plural, add the relative pronoun, and correct the prepositional phrase.",s:"it is one of the best steps that a country can take to prepare for the future"},
+  {t:"error",c:"GR",q:"but they also have to invest in other essential fields",x:"'They' has no antecedent — the subject of the previous clause is 'a country' (singular, treated as 'it'). The pronoun shift to 'they' is a reference error.",h:"Use a consistent subject: 'the government' or 'a country'.",s:"but the government must also invest in other essential sectors"},
+  {t:"error",c:"GR",q:"Investing in young generations play an important-role for any nations want to development efficiently.",x:"Three errors: (1) 'Investing... play' — gerund subject requires singular verb 'plays'. (2) 'Any nations want to development' — missing relative pronoun 'that' and 'development' should be the verb 'develop'. (3) 'Important-role' — no hyphen needed here.",h:"Fix verb agreement, add the relative pronoun, and use the verb form 'develop'.",s:"Investing in young people plays an important role for any nation that wants to develop efficiently."},
+  {t:"error",c:"GR",q:"Government should invest in education to create more conditions for young generations can access to studying.",x:"Two errors: (1) 'Government' is missing the article 'the'. (2) 'Conditions for young generations can access to studying' is ungrammatical — 'access' is a transitive verb and does not take 'to'; the clause structure also requires 'so that' or a relative clause.",h:"Add 'the' before 'government' and restructure the purpose clause.",s:"The government should invest in education so that young people can access quality learning opportunities."},
+  {t:"error",c:"LR",q:"They always have good brainstorming to thing out of the box and findout better solution.",x:"Multiple errors: (1) 'Have good brainstorming' is not a standard collocation — 'brainstorming' is a gerund/noun referring to a process, not something one 'has'. (2) 'Thing out of the box' is a misspelling of 'think outside the box'. (3) 'Findout' is not a word — it should be 'find out' (two words) or 'discover'. (4) 'Better solution' is missing the article 'a'.",h:"Replace the non-standard collocation and fix the spelling and word formation errors.",s:"They consistently think outside the box and devise innovative solutions to complex problems."},
+  {t:"error",c:"LR",q:"They can also use technologies that is necessary for modernize in digital world.",x:"Three errors: (1) 'Technologies that is' — 'technologies' is plural, requiring 'are'. (2) 'Necessary for modernize' — 'modernize' should be the gerund 'modernizing' or rephrased. (3) 'In digital world' is missing the article 'the'.",h:"Fix the verb agreement, use the correct verb form, and add the article.",s:"They are also proficient in technologies essential for navigating the modern digital landscape."},
+  {t:"error",c:"GR",q:"the government should have in other investment for future preparation",x:"'Have in other investment' is ungrammatical — 'have in' is not a standard construction. The intended meaning is to invest in other areas or to make other investments.",h:"Replace 'have in' with a standard verb phrase.",s:"the government should also make targeted investments in other areas in preparation for the future"},
+  {t:"error",c:"GR",q:"Senior workers should be invested in because they have much experience and expertise which are meaningful contribution for …a. variety of fields",x:"Two errors: (1) 'Much experience' is grammatically correct but unusual in an affirmative declarative — 'considerable experience' or 'extensive experience' is more natural and academic. (2) 'Meaningful contribution for a variety of fields' should be 'meaningful contributions to a variety of fields' (plural noun + correct preposition).",h:"Use 'extensive' for the experience quantifier, and fix the noun number and preposition.",s:"Senior workers possess extensive experience and expertise, enabling them to make meaningful contributions to a wide range of fields."},
+  {t:"error",c:"GR",q:"Training doctors and improving healthcare facilities make it become easier for people access to advanced healthcare.",x:"Two errors: (1) 'Make it become easier' is redundant — 'make it easier' is the standard causative construction. (2) 'For people access to' is missing the infinitive 'to access'.",h:"Remove 'become' from the causative, and add 'to' before 'access'.",s:"Training doctors and improving healthcare facilities make it easier for people to access advanced medical care."},
+  {t:"error",c:"TR",q:"In conclusion, I agree that investing more resources in young people is the best way for a country to prepare for the future. Although investing in other investment such as infrastructures and transports will improve significantly people standard of living, young generation is the owner of the country",x:"The conclusion contradicts the essay's body. The body paragraph 2 argues that investment in other areas (senior workers, healthcare, infrastructure) is important and necessary — yet the conclusion dismisses this and restates absolute agreement with the original statement. This inconsistency undermines TR: the position shifts between the body and the conclusion.",h:"Align the conclusion with what was actually argued in the body. Since the essay argues for balanced investment, the conclusion should restate that nuanced position.",s:"In conclusion, while investing in young people is the most vital step a country can take for its future, this alone is insufficient. A comprehensive approach that also supports experienced workers and funds critical infrastructure will yield the most sustainable long-term development."},
+  {t:"improve",c:"TR",q:"I agree with that because it is one of the best way for a country can do for preparing in the future, but they also have to invest in other essential fields.",x:"The thesis is the weakest in the essay. It agrees with the statement but provides no indication of the writer's specific reasoning or the scope of the essay. The qualification ('invest in other fields') is vague. Band 6+ requires a 'clear and developed position' even in the introduction.",h:"State your position precisely and name the complementary areas the essay will discuss.",s:"I largely agree that investing in young people is the most effective strategy; however, I also believe that supporting experienced workers and developing key infrastructure are equally essential components of a country's long-term preparation."},
+  {t:"improve",c:"LR",q:"Then they will have good base and become useful generations.",x:"'Good base' is informal and vague ('solid foundation' is the standard academic expression). 'Useful generations' is an awkward collocation — people are not described as 'useful generations' in academic writing.",h:"Replace both phrases with more precise academic vocabulary.",s:"This equips them with a solid foundation of knowledge and skills, enabling them to become a productive and capable workforce."},
+  {t:"improve",c:"CC",q:"Besides investing in young people, the government should have in other investment for future preparation.",x:"'Besides' is used twice as a paragraph opener (body paragraphs 1 and 2). Repeating the same connector signals limited cohesive range. 'Besides' is also slightly informal as an academic paragraph opener.",h:"Replace the second 'Besides' with a more formal transition that signals the shift to complementary arguments.",s:"Beyond investing in young people, the government must also direct resources towards other sectors critical to the nation's future."},
+  {t:"improve",c:"TR",q:"young generation is the owner of the country who will operate and develop country in the future",x:"'Owner of the country' is an unusual, informal metaphor that is not precise enough for academic writing. It attempts to make a point about civic responsibility but lacks the clarity needed to support the argument.",h:"Replace the metaphor with a precise claim about the role of young people in national governance and economic leadership.",s:"the younger generation will ultimately assume leadership roles in governance, industry, and society, making their development the most direct investment a country can make in its own future"}
+];
+function cc(c){return{TR:'btr',CC:'bcc',LR:'blr',GR:'bgr'}[c]||''}
+function render(items){
+  const el=document.getElementById('items');
+  if(!items.length){el.innerHTML='<div class="empty">No items match this filter.</div>';return;}
+  el.innerHTML=items.map(d=>`<div class="item"><div class="ih"><span class="badge ${d.t==='error'?'be':'bi'}">${d.t==='error'?'Error':'Improvement'}</span><span class="badge ${cc(d.c)}">${d.c}</span></div><div class="qt">"${d.q}"</div><div class="g2"><div class="db"><div class="dl">Explanation</div><div class="dt">${d.x}</div></div><div class="db"><div class="dl">Hint</div><div class="dt">${d.h||''}</div></div></div><div class="db"><div class="dl">Correction / suggestion</div><div class="cv">${d.s}</div></div></div>`).join('');
+}
+function flt(k,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  let f=D;
+  if(k==='error')f=D.filter(d=>d.t==='error');
+  else if(k==='improve')f=D.filter(d=>d.t==='improve');
+  else if(['TR','CC','LR','GR'].includes(k))f=D.filter(d=>d.c===k);
+  render(f);
+}
+render(D);
+</script>
