@@ -1,0 +1,79 @@
+
+<h2 class="sr-only">IELTS Writing Task 2 feedback on youth investment essay: errors and improvements across four band criteria</h2>
+<style>
+.wrap{padding:1rem 0}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.bc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;text-align:center;border:0.5px solid var(--color-border-tertiary)}
+.bl{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+.bv{font-size:20px;font-weight:500}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.fb{font-size:12px;padding:4px 11px;border-radius:99px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.fb.on{background:var(--color-background-info);color:var(--color-text-info);border-color:transparent}
+.items{display:flex;flex-direction:column;gap:10px}
+.item{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;background:var(--color-background-primary)}
+.ih{display:flex;gap:7px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;white-space:nowrap;font-weight:500}
+.be{background:var(--color-background-danger);color:var(--color-text-danger)}
+.bi{background:var(--color-background-warning);color:var(--color-text-warning)}
+.btr{background:#E6F1FB;color:#0C447C}
+.bcc{background:#EAF3DE;color:#27500A}
+.blr{background:#FAEEDA;color:#633806}
+.bgr{background:#FBEAF0;color:#72243E}
+.qt{font-size:13px;font-style:italic;color:var(--color-text-secondary);background:var(--color-background-secondary);border-left:3px solid var(--color-border-secondary);padding:7px 11px;border-radius:0 4px 4px 0;margin-bottom:10px;line-height:1.55}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.db{font-size:13px}
+.dl{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.dt{color:var(--color-text-primary);line-height:1.5}
+.cv{color:var(--color-text-success);font-size:13px;line-height:1.5}
+.empty{text-align:center;color:var(--color-text-secondary);font-size:13px;padding:2.5rem}
+</style>
+<div class="wrap">
+<div class="sg">
+  <div class="bc"><div class="bl">Task Response</div><div class="bv" style="color:#185FA5">~5</div></div>
+  <div class="bc"><div class="bl">Coherence & Cohesion</div><div class="bv" style="color:#3B6D11">~5</div></div>
+  <div class="bc"><div class="bl">Lexical Resource</div><div class="bv" style="color:#854F0B">~5.5</div></div>
+  <div class="bc"><div class="bl">Grammatical Range</div><div class="bv" style="color:#993556">~4.5</div></div>
+</div>
+<div class="filters">
+  <button class="fb on" onclick="flt('all',this)">All</button>
+  <button class="fb" onclick="flt('error',this)">Errors only</button>
+  <button class="fb" onclick="flt('improve',this)">Improvements only</button>
+  <button class="fb" onclick="flt('TR',this)">TR</button>
+  <button class="fb" onclick="flt('CC',this)">CC</button>
+  <button class="fb" onclick="flt('LR',this)">LR</button>
+  <button class="fb" onclick="flt('GR',this)">GR</button>
+</div>
+<div class="items" id="items"></div>
+</div>
+<script>
+const D=[
+  {t:"error",c:"TR",q:"On the other hand, focusing solely on young people may not adequately prepare the country for the future.",x:"This is an 'agree or disagree' question — not a 'discuss both views' question. Introducing a counter-argument with 'on the other hand' implies the writer is presenting two neutral sides rather than developing a personal, argued position. The rubric for TR at Band 6+ requires a 'clear and developed position', not a neutral discussion.",h:"Replace contrast signposting with qualifications of your own position: 'While youth investment is central, a broader approach is also necessary…'",s:"While investing in young people is essential, this alone is insufficient. A forward-looking country must also allocate resources to experienced workers and key national sectors to ensure comprehensive and sustained development."},
+  {t:"error",c:"GR",q:"The government invests in schools, universities and vocational training to help young people gain essential skills, knowledge and practical skills.",x:"'Essential skills' and 'practical skills' are listed together as separate items, but they overlap — practical skills are a subset of essential skills. The repetition signals a lack of precision. It also creates a redundant three-item list where only two distinct concepts exist.",h:"Remove the repetition. List distinct, non-overlapping outcomes of educational investment.",s:"The government can invest in schools, universities, and vocational training to equip young people with the academic knowledge and practical skills needed for the modern workforce."},
+  {t:"error",c:"GR",q:"This is ready to adapt to future challenges by producing innovative future workers. Support a country's long-term development",x:"Two serious errors: (1) 'This is ready to adapt' is ungrammatical — 'this' as a subject needs a clear noun antecedent, and the predicate 'is ready to adapt' does not logically follow the previous sentence about creativity. (2) 'Support a country's long-term development' is a sentence fragment — a bare infinitive phrase with no subject or finite verb.",h:"Reconstruct both as complete sentences with clear subjects and finite verbs.",s:"This adaptability positions young people to tackle future challenges effectively, generating innovation that supports a country's long-term development."},
+  {t:"error",c:"GR",q:"Secondly, also invest in key areas of a country's development.",x:"'Secondly, also invest in key areas' is a sentence fragment and an imperative clause with no subject. In an academic essay, arguments must be stated as complete declarative sentences, not instructions.",h:"Add a subject and reformulate as a full sentence presenting the argument.",s:"Secondly, the government should invest in key areas of national development, including healthcare and infrastructure."},
+  {t:"error",c:"GR",q:"The most effective way for a country to develop is to invest in its younger generation, to invest in key areas of a country and balance environmental protection",x:"The conclusion introduces 'balance environmental protection' — an idea that appears for the first time in the final paragraph and was not developed anywhere in the essay body. Introducing new arguments in the conclusion is a TR error. The parallel structure is also awkward: 'to invest… to invest… and balance' is unparallel.",h:"Remove the environmental point (or develop it in the body), and make the parallel structure consistent.",s:"In conclusion, a country best prepares for its future by investing strategically in young people while simultaneously supporting experienced workers and developing critical national infrastructure."},
+  {t:"error",c:"TR",q:"Besides, the government should balance economic development with environmental protection, driving economic growth while protecting the environment.",x:"This paragraph introduces environmental protection as a third argument — a topic not raised anywhere in the body of the essay. Adding a new substantive argument in the penultimate paragraph without development violates TR: it creates a partial, undeveloped point that the examiner cannot assess properly.",h:"Remove this paragraph entirely, or relocate and develop it as a body paragraph point if it is to be included.",s:"[Remove this paragraph. If environmental sustainability is a genuine argument, it needs its own body paragraph with explanation and example.]"},
+  {t:"improve",c:"TR",q:"I agree that allocating significant resources to the youth is a strategic investment for a country's future. However, in addition to investing in the young people, it is also essential to allocate resources to other important domains",x:"The introduction states a partial agreement but does not specify what 'other important domains' means, which weakens the thesis. Band 6+ requires a 'clear and developed position' — even in the introduction, the reader should understand what the writer's specific qualification is.",h:"Name the two or three complementary areas briefly in the thesis.",s:"I agree that investing in young people is central to a nation's future; however, I also believe that supporting experienced workers and funding critical public infrastructure are equally vital for sustainable national development."},
+  {t:"improve",c:"CC",q:"This is to improve the quality of the future workforce and contribute to the country's economic growth.",x:"'This is to improve…' is an informal construction. In academic writing, purpose is expressed with 'in order to', 'so as to', or a result clause with 'thereby'. The sentence also repeats the idea of 'workforce quality' already stated in the previous sentence.",h:"Use a formal purpose expression and add new information rather than restating.",s:"Such investment enhances workforce quality and lays the groundwork for sustained economic growth."},
+  {t:"improve",c:"CC",q:"Companies could organize retraining programs to help equip people with new skills and adapt to changing markets.",x:"'Companies' is an unexpected subject here — the surrounding argument is about governments and authorities investing in workers. Companies organising retraining is a different claim (private sector action) that is introduced without explanation and then not developed.",h:"Maintain subject consistency — if the argument is about government investment, keep 'the government' or 'authorities' as the subject.",s:"Governments could introduce retraining programmes to equip experienced workers with new skills, helping them remain competitive in rapidly evolving labour markets."},
+  {t:"improve",c:"LR",q:"the younger generation fosters innovation and creativity",x:"'Fosters innovation and creativity' is a vague generalization. 'Fosters' is a reasonable verb choice, but the claim needs to be more precisely connected to how this prepares the country for the future — which is the question's core focus.",h:"Add a causal link: youth foster innovation → this drives technological progress → the country is better prepared.",s:"The younger generation drives innovation and technological advancement, positioning the country to remain competitive in a rapidly evolving global economy."},
+  {t:"improve",c:"LR",q:"other important domains",x:"'Important domains' is vague and generic. In the introduction, the thesis qualifies the main claim with a reference to these domains but does not name them. This vagueness carries through the essay and weakens the sense of a coherent, argued position.",h:"Replace with specific terms that reflect what the essay actually discusses.",s:"other critical sectors, including workforce development for experienced workers and public infrastructure"},
+  {t:"improve",c:"GR",q:"Young people are open to new ideas and technologies.",x:"This is a grammatically correct but very simple declarative sentence with no subordination. It states a general truth without qualification or development. At Band 6+, a variety of complex structures is expected — relative clauses, conditional structures, participial phrases.",h:"Embed this as a relative clause or combine it with a consequence clause.",s:"Young people, who are inherently receptive to new ideas and emerging technologies, are uniquely positioned to drive the innovations that a modern economy demands."}
+];
+function cc(c){return{TR:'btr',CC:'bcc',LR:'blr',GR:'bgr'}[c]||''}
+function render(items){
+  const el=document.getElementById('items');
+  if(!items.length){el.innerHTML='<div class="empty">No items match this filter.</div>';return;}
+  el.innerHTML=items.map(d=>`<div class="item"><div class="ih"><span class="badge ${d.t==='error'?'be':'bi'}">${d.t==='error'?'Error':'Improvement'}</span><span class="badge ${cc(d.c)}">${d.c}</span></div><div class="qt">"${d.q}"</div><div class="g2"><div class="db"><div class="dl">Explanation</div><div class="dt">${d.x}</div></div><div class="db"><div class="dl">Hint</div><div class="dt">${d.h}</div></div></div><div class="db"><div class="dl">Correction / suggestion</div><div class="cv">${d.s}</div></div></div>`).join('');
+}
+function flt(k,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  let f=D;
+  if(k==='error')f=D.filter(d=>d.t==='error');
+  else if(k==='improve')f=D.filter(d=>d.t==='improve');
+  else if(['TR','CC','LR','GR'].includes(k))f=D.filter(d=>d.c===k);
+  render(f);
+}
+render(D);
+</script>
