@@ -1,0 +1,84 @@
+
+<h2 class="sr-only">IELTS Writing Task 2 feedback: errors and improvements across four band criteria</h2>
+<style>
+.wrap{padding:1rem 0}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.bc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;text-align:center;border:0.5px solid var(--color-border-tertiary)}
+.bl{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+.bv{font-size:20px;font-weight:500}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.fb{font-size:12px;padding:4px 11px;border-radius:99px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.fb.on{background:var(--color-background-info);color:var(--color-text-info);border-color:transparent}
+.items{display:flex;flex-direction:column;gap:10px}
+.item{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;background:var(--color-background-primary)}
+.ih{display:flex;gap:7px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;white-space:nowrap;font-weight:500}
+.be{background:var(--color-background-danger);color:var(--color-text-danger)}
+.bi{background:var(--color-background-warning);color:var(--color-text-warning)}
+.btr{background:#E6F1FB;color:#0C447C}
+.bcc{background:#EAF3DE;color:#27500A}
+.blr{background:#FAEEDA;color:#633806}
+.bgr{background:#FBEAF0;color:#72243E}
+.qt{font-size:13px;font-style:italic;color:var(--color-text-secondary);background:var(--color-background-secondary);border-left:3px solid var(--color-border-secondary);padding:7px 11px;border-radius:0 4px 4px 0;margin-bottom:10px;line-height:1.55}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.db{font-size:13px}
+.dl{font-size:10px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.dt{color:var(--color-text-primary);line-height:1.5}
+.cv{color:var(--color-text-success);font-size:13px;line-height:1.5}
+.empty{text-align:center;color:var(--color-text-secondary);font-size:13px;padding:2.5rem}
+</style>
+<div class="wrap">
+<div class="sg">
+  <div class="bc"><div class="bl">Task Response</div><div class="bv" style="color:#185FA5">~4.5</div></div>
+  <div class="bc"><div class="bl">Coherence & Cohesion</div><div class="bv" style="color:#3B6D11">~5</div></div>
+  <div class="bc"><div class="bl">Lexical Resource</div><div class="bv" style="color:#854F0B">~4.5</div></div>
+  <div class="bc"><div class="bl">Grammatical Range</div><div class="bv" style="color:#993556">~4</div></div>
+</div>
+<div class="filters">
+  <button class="fb on" onclick="flt('all',this)">All</button>
+  <button class="fb" onclick="flt('error',this)">Errors only</button>
+  <button class="fb" onclick="flt('improve',this)">Improvements only</button>
+  <button class="fb" onclick="flt('TR',this)">TR</button>
+  <button class="fb" onclick="flt('CC',this)">CC</button>
+  <button class="fb" onclick="flt('LR',this)">LR</button>
+  <button class="fb" onclick="flt('GR',this)">GR</button>
+</div>
+<div class="items" id="items"></div>
+</div>
+<script>
+const D=[
+  {t:"error",c:"TR",q:"In conclusion, investing in teenager isnt the best way for a country to prepare for the future.",x:"The conclusion directly contradicts the introduction, which states 'I agree that investing in young people is one of the ways for preparing future of nations.' The introduction expresses (partial) agreement; the conclusion rejects the statement outright. This positional inconsistency is one of the most serious TR errors possible — it leaves the examiner unable to identify a coherent, stable position.",h:"Align the conclusion with the position stated in the introduction: partial agreement. Summarise what was actually argued.",s:"In conclusion, while investing in young people is an important pillar of national development, it is not sufficient on its own. A balanced approach that also supports experienced workers and funds critical infrastructure will best prepare a country for the future."},
+  {t:"error",c:"TR",q:"investing parallel with another areas also important",x:"'Another areas' is grammatically incorrect — 'another' is used with singular nouns; the correct form for plural is 'other areas'. 'Investing parallel with' is also a non-standard expression. More importantly, the thesis is vague: it does not specify what the 'other areas' are or why they matter.",h:"Fix the grammar and clarify what the complementary investment areas are.",s:"However, complementary investment in other critical sectors — including workforce development and infrastructure — is equally necessary."},
+  {t:"error",c:"GR",q:"There are many reasons that government should invest in teenager.",x:"Two errors: (1) 'Government' is missing the article 'the'. (2) 'Teenager' is missing the article — either 'teenagers' (plural) or 'young people' is needed.",h:"Add the article 'the' before 'government' and make 'teenager' plural.",s:"There are many reasons why the government should invest in young people."},
+  {t:"error",c:"GR",q:"Firstly, building a potential future workforce.",x:"This is a sentence fragment — a gerund phrase with no subject or finite verb. It cannot stand as a complete sentence in academic writing.",h:"Convert this into a full sentence with a subject and main verb.",s:"Firstly, such investment helps build a capable and productive future workforce."},
+  {t:"error",c:"GR",q:"Government can invest in school and universities training. THerefore, they will gain practical skills and knowledge.",x:"Three errors: (1) 'Government' is missing the article 'the'. (2) 'School' should be 'schools' (plural). (3) 'THerefore' has a capitalisation error (mid-sentence capital). (4) 'They will gain' — 'they' refers ambiguously to either the government or young people.",h:"Add the article, pluralise 'school', fix the capitalisation, and clarify the pronoun.",s:"The government can invest in schools and university training programmes, enabling young people to acquire the practical skills and knowledge required by a modern economy."},
+  {t:"error",c:"GR",q:"investing in teenager will contribute to the country's economic",x:"Two errors: (1) 'Teenager' should be plural: 'teenagers' or 'young people'. (2) 'The country's economic' is incomplete — 'economic' is an adjective, not a noun. The intended noun is 'economy' or 'economic growth'.",h:"Make 'teenager' plural and complete the noun phrase.",s:"investing in young people will contribute to the country's economic growth"},
+  {t:"error",c:"LR",q:"young people's investigation encourages the creativity and innovation",x:"'Investigation' is a false friend or word confusion error. The intended word is likely 'ingenuity' or 'initiative' — not 'investigation', which means formal inquiry or research. This significantly changes the meaning.",h:"Replace 'investigation' with the intended concept — youth creativity, ingenuity, or initiative.",s:"Young people's ingenuity and creative thinking foster innovation"},
+  {t:"error",c:"GR",q:"They can open to new ideas and technologies.",x:"'Can open to' is an incomplete and ungrammatical construction. The correct phrase is 'be open to' — 'open' here functions as a predicate adjective requiring the verb 'be'.",h:"Add 'be' before 'open'.",s:"They are open to new ideas and technologies"},
+  {t:"error",c:"GR",q:"this produces innovative future workers which ready to adopt to future challenges",x:"Two errors: (1) 'Workers which ready' is missing the verb 'are' in the relative clause. (2) 'Adopt to' is the wrong collocation — 'adapt to' means to adjust to something; 'adopt' means to take on or choose.",h:"Add 'are' in the relative clause and change 'adopt' to 'adapt'.",s:"this produces innovative workers who are ready to adapt to future challenges"},
+  {t:"error",c:"LR",q:"elders' investments are necessary for a meaningful future",x:"'Elders' investments' is an unusual phrase — 'elders' typically refers to respected senior figures in a community (e.g. tribal elders), not to older workers in general. 'Investment in elders' (or older workers) is the correct framing. 'Meaningful future' is also vague.",h:"Rephrase to 'investment in experienced or older workers' and specify what makes the future meaningful.",s:"Investing in experienced and older workers is equally important for sustained national development"},
+  {t:"error",c:"LR",q:"They have experiences, expertises and methods to monitor the new workforce.",x:"Two errors: (1) Both 'experiences' and 'expertises' are incorrectly used as countable plural nouns — in academic English, both are typically uncountable ('experience', 'expertise'). (2) 'Monitor the new workforce' is the wrong verb — experienced workers mentor or guide younger colleagues, they do not monitor them.",h:"Remove the plural -s from both uncountable nouns and replace 'monitor' with a more accurate verb.",s:"They possess considerable experience and expertise, which they can use to mentor and guide the emerging workforce."},
+  {t:"error",c:"GR",q:"government invests in other important areas is a good idea",x:"This sentence fuses a subject clause ('government invests in other important areas') with a predicate ('is a good idea') without the correct structure. The subject clause must be a gerund phrase or a 'that'-clause, not a finite verb clause.",h:"Convert the subject to a gerund phrase.",s:"Government investment in other important areas is also essential"},
+  {t:"error",c:"GR",q:"Medical investments such as investing in doctor and healthcare facilities plays an important role",x:"Two errors: (1) 'Doctor' should be plural: 'doctors'. (2) Subject-verb agreement: 'Medical investments' is plural, requiring 'play', not 'plays'.",h:"Pluralise 'doctor' and change 'plays' to 'play'.",s:"Investments in medical training and healthcare facilities play an important role in improving living standards"},
+  {t:"error",c:"GR",q:"Transportation investments such as improving infrastructure and transport systems increases the travel more flexibly to enrich country future",x:"Multiple errors: (1) 'Increases' should be 'increase' — plural subject. (2) 'The travel more flexibly' is non-standard. (3) 'Country future' is missing the article 'the' and possessive apostrophe. (4) The overall sentence meaning is unclear.",h:"Fix the verb agreement, remove 'the' before 'travel', and restructure the sentence for clarity.",s:"Investment in infrastructure and transport systems enhances connectivity and mobility, laying a practical foundation for the country's future development."},
+  {t:"improve",c:"TR",q:"Investing more resources in young people is the best way for a country to prepare for the future. I agree that investing in young people is one of the ways for preparing future of nations.",x:"The introduction states the proposition as a fact in the first sentence, then immediately qualifies it with 'one of the ways' in the second sentence — without ever signalling this is a partial-agreement essay. The thesis needs to clearly state the writer's position (partial agreement) and signal what the essay will argue.",h:"Rewrite the introduction to clearly state a partial-agreement position and preview the essay's structure.",s:"While investing in young people is undeniably one of the most effective strategies for national development, I believe a comprehensive approach — one that also supports experienced workers and funds critical sectors such as healthcare and infrastructure — is necessary to truly prepare a country for the future."},
+  {t:"improve",c:"CC",q:"Firstly, building a potential future workforce. Government can invest in school and universities training. THerefore, they will gain practical skills and knowledge. As a result, investing in teenager will contribute to the country's economic.",x:"The first body paragraph consists almost entirely of short, simple sentences strung together with transition words ('Therefore', 'As a result'). This creates a mechanical, list-like structure rather than a developed argument. Band 6 CC requires ideas to be 'logically organised with a clear progression', not a sequence of isolated statements.",h:"Combine related ideas into complex sentences using subordination, relative clauses, and participial phrases.",s:"By investing in schools and universities, the government equips young people with the practical knowledge and skills they need to become a productive workforce — one capable of driving economic growth and adapting to the demands of a changing global economy."},
+  {t:"improve",c:"TR",q:"There are other areas that should be invested to a good future.",x:"The conclusion is too brief and vague to function as a proper synthesis. 'Invested to a good future' is also an ungrammatical collocation ('invested in… for a better future'). The conclusion should summarise the essay's specific arguments, not just assert that other areas matter.",h:"Rewrite to refer specifically to the areas discussed and connect them to the essay's central argument.",s:"Alongside youth investment, supporting experienced workers through retraining and funding healthcare and infrastructure are equally vital steps — together these measures form a comprehensive strategy for sustainable national development."}
+];
+function cc(c){return{TR:'btr',CC:'bcc',LR:'blr',GR:'bgr'}[c]||''}
+function render(items){
+  const el=document.getElementById('items');
+  if(!items.length){el.innerHTML='<div class="empty">No items match this filter.</div>';return;}
+  el.innerHTML=items.map(d=>`<div class="item"><div class="ih"><span class="badge ${d.t==='error'?'be':'bi'}">${d.t==='error'?'Error':'Improvement'}</span><span class="badge ${cc(d.c)}">${d.c}</span></div><div class="qt">"${d.q}"</div><div class="g2"><div class="db"><div class="dl">Explanation</div><div class="dt">${d.x}</div></div><div class="db"><div class="dl">Hint</div><div class="dt">${d.h||''}</div></div></div><div class="db"><div class="dl">Correction / suggestion</div><div class="cv">${d.s}</div></div></div>`).join('');
+}
+function flt(k,btn){
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  let f=D;
+  if(k==='error')f=D.filter(d=>d.t==='error');
+  else if(k==='improve')f=D.filter(d=>d.t==='improve');
+  else if(['TR','CC','LR','GR'].includes(k))f=D.filter(d=>d.c===k);
+  render(f);
+}
+render(D);
+</script>
